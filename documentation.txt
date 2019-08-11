@@ -1,0 +1,19 @@
+This project made use of Oracle JDK 8 (Java Development Kit), Java Swing and the IDE Netbeans. First of all, you should install the Oracle JDK 8 by accessing their site which is https://www.oracle.com/technetwork/pt/java/javase/downloads/index.html. You may opt to download the bundle with the IDE Netbeans, feel free to download that and install it in your system. This tutorial will focus on the installation of both softwares in separate.
+Once downloaded you should install the JDK following the steps presented in here (https://docs.oracle.com/javase/8/docs/technotes/guides/install/install_overview.html) depending on your OS (Operational System).
+If you are in a Linux system, probably you already have installed the openJDK. To make sure you are using the Oracle version, you can access the following sites and references:
+	- https://stackoverflow.com/questions/42974580/how-to-change-open-jdk-to-oracle-jdk
+	- https://askubuntu.com/questions/430434/replace-openjdk-with-oracle-jdk-on-ubuntu
+
+Since Java Swing is already built in Java and the JDK, you shouldn't need to download a SDK (Software Development Kit) to develop your applications, just use the proper command-line tools contained in the JDK or an IDE (Integrated Development Environment). The next step is to download and install the IDE. for that, just go to the site https://netbeans.org/downloads/8.0.1/?pagelang=pt_BR and download the version that suits best your needs. For this project, we worked with the 8.0.1 version. For the installation, follow the steps in https://netbeans.org/community/releases/82/install.html .
+
+OBS: My installation of Netbeans was in my Documents folder and the JDK installation was in /usr/lib/jvm/java-8-oracle.
+
+Sites that may be helpful:
+	- https://www3.ntu.edu.sg/home/ehchua/programming/howto/netbeans_howto.html
+	- http://wiki.netbeans.org/FaqRunningOnJre
+	- https://netbeans.org/kb/docs/java/javase-embedded.html
+
+After installing all that it is needed, only open the project in Netbeans and execute the project. The class with the main function is named TelaDeInicio.java .
+
+OBS: If your Netbeans has trouble starting, maybe it isn't finding the JDK. The following command would start the program the right manner:
+	./netbeans --jdkhome repository_where_the_installation_is
