@@ -1,6 +1,6 @@
 package jogo.pkg21;
 
-//Aluno: Matheus de Souza Sereno, N� USP: 9368491
+//Aluno: Matheus de Souza Sereno
 
 import java.awt.Container;
 import java.awt.Dimension;
@@ -21,20 +21,19 @@ public class Jogador {
 	 * 
 	 * aposta: inteiro escolhido pelo usuario
 	 * 
-	 * dinheiro: � o dinheiro disponibilizado 
+	 * dinheiro: é o dinheiro disponibilizado 
 	 * para que o jogador comece a jogar
 	 * 
-	 * pontos: pontua��o dada pelas suas cartas
+	 * pontos: pontuação dada pelas suas cartas
 	 * 
 	 * cartas: array de duas cartas que ele 
 	 * recebe inicialmente do dealer
 	 * 
-	 * contador de A: este � um contador de 
-	 * quantas cartas �s o jogador possui a
-	 *  fim de corrigir a pontua��o
-	 * do jogador caso a carta tenha que passar
-	 *  de seu valor de 11 para 1 para que o jogador
-	 *  n�o ultrapasse 21 pontos
+	 * contador de A: este é um contador de 
+	 * quantos Áses o jogador possui a
+	 * fim de corrigir a sua pontuação
+	 * caso ela ultrapasse 21 pontos e se tenha que alterar 
+	 * o valor do Ás de 11 para 1 ponto
 	 */
 	private String nome;
 	private int aposta;
@@ -95,10 +94,10 @@ public class Jogador {
 	}
 
 	/*
-	 * O jogador ao receber suas cartas j� conta se possui algum �s e
-	 * tamb�m seta quantos pontos possui inicialmente. N�o � necess�ria
-	 * uma implementa��o de condi��es para a situa��o de pontos > 21, pois
-	 * o m�ximo de pontua��o com 2 cartas � 21
+	 * O jogador ao receber suas cartas já conta se possui algum As e
+	 * também seta quantos pontos possui inicialmente. Não é necessária
+	 * uma implementação de condições para a situação de pontos > 21, pois
+	 * o máximo de pontuação com 2 cartas é 21
 	 */
 	public void setCartas(Carta card1, Carta card2) {
 		this.cartas[0] = card1;
@@ -108,7 +107,9 @@ public class Jogador {
 			if(cartas[i].getNome().equals("A"))
 				contador_de_A +=1;
 		}
-		if(this.getPontos()>21 && this.getContador_de_A()>0){//como calcular pontua��o se obtivermos um �s
+                
+                // Este if parece desnecessário
+		if(this.getPontos()>21 && this.getContador_de_A()>0){// Como calcular pontuação se obtivermos um As
 			while(this.getContador_de_A() !=0){
 				this.somarPontos(-10);
 				this.setContador_de_A(-1);
@@ -118,23 +119,23 @@ public class Jogador {
 		}
 	}
 	
-	/*M�todo criado por comodidade por ele foi
-	 * criado para a classe Dealer tamb�m. Entretanto,
-	 * faz algo que poderia ser feito pelo m�todo 
+	/* Método criado por comodidade pois ele foi
+	 * criado para a classe Dealer. Entretanto,
+	 * faz algo que poderia ser feito pelo método 
 	 * setPontos(int pontos).  
 	 */
 	public void somarPontos(int a){
 		this.pontos += a ; 
 	}
 	
-	/*M�todo que fornece a imagem de uma das
+	/* Método que retorna a imagem de uma das
 	 * duas cartas iniciais do jogador 
 	 */
 	public BufferedImage getImagens(int i){
 		return this.cartas[i].getCarta();
 }
 	
-	/*M�todo igual ao da classe Baralho, e que 
+	/*  Método igual ao da classe Baralho, e que 
 	 *  foi utilizada para conferir o funcionamento
 	 *  dos objetos desta classe.
 	 */
@@ -151,5 +152,5 @@ public class Jogador {
 			conteudo.add(p);
 			janela.pack();
 			janela.setVisible(true);
-	}//fim do m�todo	
+	}//fim do método	
 }

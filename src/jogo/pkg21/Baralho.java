@@ -1,6 +1,6 @@
 package jogo.pkg21;
 
-//Aluno: Matheus de Souza Sereno, N� USP: 9368491
+//Aluno: Matheus de Souza Sereno
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -11,11 +11,12 @@ import javax.swing.*;
 
 public class Baralho {
 	
+        // Atributos da classe
 	private Carta[] deque;
-	private int cartaAtual;  //carta a ser entregue na pr�xima jogada
-	private int num_de_baralhos; //numero de baralhos juntos em um deque
+	private int cartaAtual;  // Carta a ser entregue na próxima jogada
+	private int num_de_baralhos; // Número de baralhos juntos em um deque
 	
-	//Construtor de um deque de cartas com um certo n�mero de baralhos
+	// Construtor de um deque de cartas com um certo número de baralhos
 	public Baralho(int num) throws IOException{
 		
 		String[] nomes = {"2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"};
@@ -24,11 +25,14 @@ public class Baralho {
 		deque = new Carta[num*52];
 		cartaAtual = 0;
 		
-		/*Informa��o para extrair as 52 cartas de 1 imagem que cont�m todas.
-		A imagem est� dentro da pasta do projeto. Os valores a seguir foram
-		definidos empiricamente, testando o programa e encontrando o melhor
-		resultado*/
-		final int largura = 40;
+		/* Informação para extrair as imagens individuais de 52 cartas a
+                partir de 1 imagem que contém todas.
+		A imagem está situada na pasta do projeto. 
+                Os valores a seguir foram definidos empiricamente, testando o 
+                método getSubimage pertencente à classe BufferedImage e 
+                encontrando o melhor resultado visualmente */
+		
+                final int largura = 40;
 		final int altura = 57; 
 		final int linhas = 4;
 		final int colunas = 13;
@@ -36,28 +40,28 @@ public class Baralho {
 		//Altura da imagem em pixels: 278
 		//Largura da imagem em pixels: 592
 		
-		/*Aqui declaramos a imagem que ser� recortada e a imagem
-		 * tempor�ria que usaremos para atribuir a cada carta a
-		 * sua respectiva imagem.
+		/* Abaixo declara-se a imagem original com as 52 cartas a qual 
+                 * será recortada e uma imagem auxiliar temporária que usaremos 
+		 * para atribuir a cada carta sua respectiva imagem.
 		 */
 		
 		BufferedImage imagem = ImageIO.read(new File("baralho.jpg"));
 		BufferedImage imagemTempCarta = null;
 		
-		/*Nestes la�os de repeti��o recortamos as imagens de todas as cartas
-		 * do baralho da figura baralho.jpg e atribuimos todos os atributos
-		 * das cartas de todo o deque. Al�m disso, as salvamos em um atributo
-		 *  desta classe que � um array de Cartas o qual se chama deque[]. Fazemos
-		 *  isto para o n�mero de baralhos a comporem o deque.  
+		/* Nos laços de repetição recorta-se as imagens de todas as cartas
+		 * do baralho da figura baralho.jpg e atribui-se todos os atributos
+		 * das cartas de todo o deque. Além disso, as cartas são salvas em um atributo
+		 *  desta classe que é um array de Cartas o qual se chamou deque[]. Fazemos
+		 *  isto para o número de baralhos que forem compor o deque.  
 		  */ 
 		for(int h = 0; h<num_de_baralhos; h++){
 			for( int suit = 0; suit<linhas; suit++){
 				for(int numero =0; numero<colunas; numero++){ 
-					/*Dividiu-se o processo de recorte da imagem em algumas etapas 
+					/* Dividiu-se o processo de recorte da imagem em algumas etapas 
 					 * devido ao fato de possibilitar melhores resultados quanto ao
-					 *  fato de as cartas n�o ficarem com espa�os brancos desnecess�rios
-					 *   provenientes da imagem original. Por isso, que foram usados 
-					 *   estes ifs para determinados valores da vari�vel numero
+					 * fato de as cartas não ficarem com espaços brancos desnecessários
+					 * provenientes da imagem original. Por isso foram usados 
+					 * ifs para determinados valores da variável número
 					 */
 					if(suit != 3){
 						if(numero <5)
@@ -75,15 +79,15 @@ public class Baralho {
 							imagemTempCarta = imagem.getSubimage(numero*largura + 4 + (numero*5), suit*altura + (suit*12) + 2 , largura, altura );
 					}
 					
-					//Defini��o dos valores das cartas
+					//Definição dos valores das cartas
 					
 					int valor = numero+2;
 					if(valor>10)
 						valor = 10;
 					if (numero == 12)
-						valor = 11;
+						valor = 11; // Valor padrão de um Ás é 11. Caso ultrapasse o valor de 21 é modificado para 1
 					
-					//Defini��o das cartas do deque
+					// Atribuição das cartas no deque
 					
 					deque[(numero+(suit*13)+(h*52))] = new Carta(suit, valor, nomes[numero], imagemTempCarta );
 				}
@@ -93,13 +97,13 @@ public class Baralho {
 	
 	
 	
-	/*M�todo que mostra as cartas em uma janela cortando-as
+	/*  Método que mostra as cartas em uma janela cortando-as
 	 *  da imagem original. Por meio deste processo foi visto
-	 *   qual eram os melhores valores para o m�todo 
-	 *   getSubimage da classe BufferedImage. Depois de setados
-	 *   os valores n�o seria mais necess�ria esta fun��o. A 
-	 *   deixei s� para o senhor ter uma ideia de como obtive
-	 *   aqueles valores empiricamente. 
+	 *  qual eram os melhores valores para o método 
+	 *  getSubimage da classe BufferedImage. Depois de setados
+	 *  os valores não seria mais necessária esta função. A 
+	 *  deixei só para a leitora ou leitor ter uma ideia de como obtive
+	 *  os valores de recorte de imagens empiricamente. 
 	 */
 	public void recortarCartas(int x, int y, int z, int w) throws IOException{
 		BufferedImage imagem = ImageIO.read(new File("baralho.jpg"));
@@ -120,10 +124,10 @@ public class Baralho {
 		conteudo.add(p);
 		janela.pack();
 		janela.setVisible(true);
-	}//fim do m�todo
+	}//fim do método
 	
 	
-	/*M�todo que na prototipagem ajudou a visualizar 
+	/* Método que na prototipagem ajudou a visualizar 
 	 * melhor os resultados do recorte das imagens de
 	 * cada carta.
 	 */
@@ -138,11 +142,11 @@ public class Baralho {
 		conteudo.add(p);
 		janela.pack();
 		janela.setVisible(true);
-	}//fim do m�todo
+	}//fim do método
 	
 	
-	/*M�todo que printa no console o nome da carta.
-	 * Este m�todo foi feito para checar o valor,
+	/* Método que printa no console o nome da carta.
+	 * Este método foi feito para checar o valor,
 	 * nome e naipe de cada carta criada.
 	 */
 	public void mostrarDeque(){
@@ -152,10 +156,10 @@ public class Baralho {
 			System.out.println(carta);
 			i+=1;
 		}
-	}//fim do m�todo
+	}//fim do método
 	
 	
-	//M�todo o qual embaralha o deque de cartas de modo rand�mico
+	// Método o qual embaralha o deque de cartas de modo randômico
 	public void embaralhar(){
 		cartaAtual = 0;
 		
@@ -168,34 +172,35 @@ public class Baralho {
 		}	
 	}//fim do m�todo
 	
-	/*M�todo que entrega uma carta ao jogador 
-	 * ou dealer e avan�a para a pr�xima carta
-	 *  do deque. Ao final do deque ele o 
-	 *  embaralha novamente
+	/* Método que entrega uma carta ao jogador 
+	 * ou dealer e avança para a próxima carta
+	 * do deque. Ao final do deque ele o 
+	 * embaralha novamente
 	 */
 	public Carta entregaCarta(){
 		if(cartaAtual<deque.length)
-			return deque[cartaAtual++];//entrega a carta atual e depois acrescenta 1 ao atributo cartaAtual
+			return deque[cartaAtual++];// Entrega a carta atual e depois acrescenta 1 ao atributo cartaAtual
 		else{
-			embaralhar();//embaralha o baralho logo que ele acaba 
+			embaralhar();// Embaralha o baralho logo que ele acaba 
+                        this.cartaAtual = 0; // Valor é zerado para não ultrapassar limites do array de Cartas
 			return deque[cartaAtual++];
 		}
 	}
 	
-	//M�todo main criado a fim de testar o c�digo
+	// Método main criado a fim de testar o código
 	/*public static void main(String[] args) throws IOException {
 		Baralho oDeque = new Baralho(5);
 		oDeque.mostrarDeque();
 		oDeque.embaralhar();
 		System.out.println("\nO deque depois de embaralhado ficou desta maneira: \n");
 		oDeque.mostrarDeque();	
-		System.out.println("Primeira carta do baralho � ");
+		System.out.println("Primeira carta do baralho é ");
 		Carta first = oDeque.entregaCarta();
 		System.out.println(first);
 		oDeque.mostrarCards(first);
 	}*/
 
-	//Setters e Getters dos atributos cartaAtual e num_de_baralhos 
+	// Setters e Getters dos atributos cartaAtual e num_de_baralhos 
 
 	public int getCartaAtual() {
 		return cartaAtual;

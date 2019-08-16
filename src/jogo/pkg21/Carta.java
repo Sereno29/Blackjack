@@ -1,6 +1,6 @@
 package jogo.pkg21;
 
-//Aluno: Matheus de Souza Sereno, N� USP: 9368491
+//Aluno: Matheus de Souza Sereno
 
 import java.awt.image.BufferedImage;
 
@@ -17,7 +17,7 @@ public class Carta {
 	 * @param card = imagem que representa a carta
 	 */
 	
-	//Construtor da classe Carta
+	// Construtor da classe Carta
 	public Carta(int suit, int value, String name, BufferedImage card){
 		naipe = suit;
 		valor = value;
@@ -25,7 +25,7 @@ public class Carta {
 		carta =card;
 	}
 	
-	//Getters e setters dos atributos da classe
+	// Getters e setters dos atributos da classe
 	
 	public int getNaipe() {
 		return naipe;
@@ -51,12 +51,12 @@ public class Carta {
 		this.nome = nome;
 	}
 
-	//obtem a imagem da carta do objeto desta classe
+	// Retorna a imagem da carta da instanciação desta classe
 	public BufferedImage getCarta() {
 		return carta;
 	}
 
-	//define uma imagem para o objeto desta classe
+	// Define uma imagem para o objeto desta classe
 	public void setCarta(BufferedImage carta) {
 		this.carta = carta;
 	}

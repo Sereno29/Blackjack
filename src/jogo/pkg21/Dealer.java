@@ -1,6 +1,7 @@
 package jogo.pkg21;
+// Melhoramento: retirar a carta virada para baixo quando for mostrar a mão do dealer
 
-//Aluno: Matheus de Souza Sereno, N� USP: 9368491
+//Aluno: Matheus de Souza Sereno
 
 import java.awt.Container;
 import java.awt.Dimension;
@@ -19,20 +20,19 @@ public class Dealer {
 	/**
 	 * Atributos do Dealer:
 	 * 
-	 * pontos: pontua��o das cartas do Dealer
+	 * pontos: pontuação das cartas do Dealer
 	 * 
 	 * cartas: array de cartas do Dealer
 	 * 
 	 * carta_pra_baixo: imagem de uma carta para baixo,
-	 * necess�ria pois o jogador s� v� uma das cartas 
-	 * do dealer no in�cio de cada rodada  
+	 * necessária pois o jogador só vê uma das cartas 
+	 * do dealer no início de cada rodada  
 	 * 
-	 * contador de A: este � um contador de 
-	 * quantas cartas �s o jogador possui a
-	 *  fim de corrigir a pontua��o
-	 * do jogador caso a carta tenha que passar
-	 *  de seu valor de 11 para 1 para que o jogador
-	 *  n�o ultrapasse 21 pontos
+	 * contador de A: este é um contador de 
+	 * quantos Áses o jogador possui a
+	 * fim de corrigir a sua pontuação
+	 * caso ela ultrapasse 21 pontos e se tenha que alterar 
+	 * o valor do Ás de 11 para 1 ponto
 	 */
 	private int pontos;
 	private Carta [] cartas = new Carta [2];
@@ -46,7 +46,7 @@ public class Dealer {
 	 * @throws IOException
 	 */
 	public Dealer(Carta a, Carta b) throws IOException{
-		//Recorte de uma imagem que possuia uma carta virada para baixo
+		//Recorte de uma imagem que possui uma carta virada para baixo
 		BufferedImage imagem = ImageIO.read(new File("baralho_com_cartaprabaixo.png"));
 		carta_pra_baixo = imagem.getSubimage(148, 460 , 75, 115);
 		pontos = a.getValor() + b.getValor();
@@ -55,10 +55,11 @@ public class Dealer {
 	}
 	
 	/*
-	 * M�todo similar ao usado na classe Baralho para visualizar 
-	 * melhor o recorte da figura. Foi importante pois as imagens
-	 * tem tamanhos diferentes e por isso alguns valores mudaram 
-	 * em rela��o ao recorte das outras cartas do deque.
+	 * Método similar ao usado na classe Baralho para visualizar 
+	 * melhor o recorte da figura de uma carta virada para baixo. 
+         * Foi importante pois as imagens tem tamanhos diferentes e 
+	 * por isso alguns valores mudaram em relação ao recorte 
+	 * das cartas do deque.
 	 */
 	public void recortarCartas(int x, int y, int z, int w) throws IOException{
 		BufferedImage imagem = ImageIO.read(new File("baralho_com_cartaprabaixo.png"));
@@ -79,7 +80,7 @@ public class Dealer {
 		conteudo.add(p);
 		janela.pack();
 		janela.setVisible(true);
-	}//fim do m�todo
+	}//fim do método
 	
 	/**
 	 * Getters e Setters dos atributos
@@ -90,13 +91,13 @@ public class Dealer {
 		return pontos;
 	}
 	
-	// mostra quantos pontos o Dealer tem com uma carta virada para baixo
+	// Retorna quantos pontos o Dealer tem com uma carta virada para baixo
 	public int getPontosCom1CartaPraBaixo() {
 		return cartas[0].getValor();
 	}
 	
 	/*
-	 * M�todo similar utilizado na classe Jogador 
+	 * Método similar utilizado na classe Jogador 
 	 * para somar pontos.
 	 */
 	public void somarPontos(int a){
@@ -109,7 +110,8 @@ public class Dealer {
 			if(cartas[i].getNome().equals("A"))
 				contador_de_A +=1;
 		}
-		if(this.getPontos()>21 && this.getContador_de_A()>0){//como calcular pontua��o se obtivermos um �s
+                // Este if parece desnecessário
+		if(this.getPontos()>21 && this.getContador_de_A()>0){//como calcular pontuação se obtivermos um Ás
 			while(this.getContador_de_A() !=0){
 				this.somarPontos(-10);
 				this.setContador_de_A(-1);
@@ -138,8 +140,8 @@ public class Dealer {
 	
 	
 	/*
-	 * M�todo utilizado para mostrar as imagens das cartas
-	 * do Dealer para o usu�rio atrav�s da interface gr�fica
+	 * Método utilizado para retornar as imagens das cartas
+	 * do Dealer para mostrá-las ao usuário através da interface gráfica
 	 */
 	public BufferedImage getImagens(int i){
 			return this.cartas[i].getCarta();
@@ -149,16 +151,19 @@ public class Dealer {
 		return contador_de_A;
 	}
 	
-	//adiciona um valor inteiro ao atributo contador de A
+	// Soma um valor inteiro ao atributo contador de A
 	public void setContador_de_A(int contador_de_A) {
 		this.contador_de_A += contador_de_A;
 	}
 
-	/*M�todo que cria uma janela para mostrar todas as imagens na m�o do dealer,
-	 *  sendo elas uma para baixo, outra para cima ou quando ele possui mais de 
-	 *  duas cartas. Provavelmente, ir� receber um JPanel como argumento na hora
-	 *  do jogo
+        
+	/* Método que cria uma janela para mostrar todas as imagens na mão do dealer,
+	 * sendo elas uma para baixo, outra para cima ou quando ele possui mais de 
+	 * duas cartas. Provavelmente, irá receber um JPanel como argumento na hora
+	 * do jogo
 	 */
+        
+        // OBS: reavaliar se este método é realmente necessário
 	public void mostrarCards() throws IOException{
 		JFrame janela = new JFrame("Carta");
 		janela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -173,6 +178,6 @@ public class Dealer {
 			conteudo.add(p);
 			janela.pack();
 			janela.setVisible(true);
-	}//fim do m�todo
+	}//fim do método
 
 }

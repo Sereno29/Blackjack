@@ -1,5 +1,7 @@
 package jogo.pkg21;
-//Aluno: Matheus de Souza Sereno, N� USP: 9368491
+
+//Aluno: Matheus de Souza Sereno
+
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.FlowLayout;
@@ -21,22 +23,23 @@ public class TelaDeInicio {
 	
 	/**
 	 * Atributos da classe TelaDeInicio:
-	 * janela: top-container onde todo o jogo estar� ocorrendo
+	 * janela: top-container onde todo o jogo estará ocorrendo
 	 * p: painel auxiliar para inserirmos JLabels, JButtons, JTextField e etc
 	 * conteudo: container da janela
-	 * count: contador respons�vel por n�o reconstruir parte da tela de in�cio
-	 *  quando o jogador voltar da janela com as informa��es de regras do jogo
+	 * count: contador responsável por não reconstruir parte da tela de início
+	 *  quando o jogador voltar da janela com as informações de regras do jogo
 	 * counter: contador de rodadas do jogo em si. Ele controla o fato de certas
-	 *  op��es de jogo como os bot�es dobrar e rendi��o s� s�o disponibilizados
+	 *  opções de jogo como os botões dobrar e rendição só são disponibilizados
 	 *  na primeira rodada do jogo
 	 */
+    
 	private JFrame janela = new JFrame("JOGO BLACKJACK");;
 	private JPanel p = new JPanel();
 	private Container conteudo;
 	private int count = 1;
 	
 	
-	//contrutor do tela de in�cio do jogo
+	// Construtor da tela de início do jogo
 	public TelaDeInicio() throws IOException{
 		
 		constroiTela();
@@ -44,32 +47,32 @@ public class TelaDeInicio {
 	}
 	
 	/*
-	 * M�todo que constroi a tela inicial do jogo com uma imagem e dois bot�es
+	 * Método que constrói a tela inicial do jogo com uma imagem e dois botões
 	 */
 	public void constroiTela() throws IOException{
 		
-		//Aplica��o do contador count
+		//Aplicação do contador count
 		if(count==1){ 
 			janela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-			janela.setLocation(800, 300);//determina a localiza��o da janela em uma regi�o mais ou menos central
+			janela.setLocation(800, 300);// Determina a localização da janela em uma região central na tela
 			conteudo = janela.getContentPane();
 		}
 
-		conteudo.setLayout(new GridLayout(3,1)); //Define o tipo de Layout nesta janela do jogo
+		conteudo.setLayout(new GridLayout(3,1)); // Define o tipo de Layout nesta janela do jogo
 		
 		JLabel imagemi = new JLabel(new ImageIcon("blackjack.jpg"));
-		conteudo.add(imagemi);//Acrescenta-se uma imagem na tela
+		conteudo.add(imagemi);// Acrescenta-se uma imagem na tela
 		
-		JButton button1 = new JButton("Jogar Blackjack");//bot�o que providencia o come�o do jogo
+		JButton button1 = new JButton("Jogar Blackjack");// botão que providencia o começo do jogo
 		button1.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
-					conteudo.removeAll();//remove todos os componentes do atributo conteudo para que ele v� vazio para sua pr�xima utiliza��o
-					p.removeAll();//remove todos os componentes do atributo p para que ele v� vazio para sua pr�xima utiliza��o
-					//Este tratamento de exce��o foi feito por causa da abertura de uma imagem 
+					conteudo.removeAll();// Remove todos os componentes do Container conteudo para que ele vá vazio para sua próxima utilização
+					p.removeAll();// Remove todos os componentes do atributo p para que ele vá vazio para sua próxima utilização
+					// Este tratamento de exceção foi feito por causa da abertura de uma imagem 
 					try{
-					telaPreJogo();//m�todo que come�a o jogo
+					telaPreJogo();// Método que começa o jogo
 					}catch(IOException e0){
-						button1.setText("N�o foi poss�vel ver as instru��es. Feche e abra o programa novamente");
+						button1.setText("Não foi possível ver as instruções. Feche e abra o programa novamente");
 						e0.printStackTrace();
 					}
 			}
@@ -77,7 +80,7 @@ public class TelaDeInicio {
 		conteudo.add(button1);
 		
 		
-		JButton button2 = new JButton("Regras do jogo/Como jogar");//bot�o que mostra um texto explicativo de como jogar
+		JButton button2 = new JButton("Regras do jogo/Como jogar");// Botão que mostra um texto explicativo de como jogar
 		button2.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				try {
